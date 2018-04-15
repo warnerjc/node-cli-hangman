@@ -1,0 +1,23 @@
+{
+  "name": "node-cli-hangman",
+  "version": "1.0.0",
+  "description": "Hangman Game - Node.js &amp; npm packages",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/warnerjc/node-cli-hangman.git"
+  },
+  "keywords": [],
+  "author": "Jason Warner",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/warnerjc/node-cli-hangman/issues"
+  },
+  "homepage": "https://github.com/warnerjc/node-cli-hangman#readme",
+  "dependencies": {
+    "inquirer": "^5.2.0"
+  }
+}
