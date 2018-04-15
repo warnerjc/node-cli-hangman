@@ -1,7 +1,7 @@
 {
   "name": "node-cli-hangman",
   "version": "1.0.0",
-  "description": "Hangman Game - Node.js &amp; npm packages",
+  "description": "Hangman Game using Node.js &amp; npm packages",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
