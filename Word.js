@@ -5,3 +5,41 @@
 //   * A function that returns a string representing the word. This should call the function on each letter object (the first function defined in `Letter.js`) that displays the character or an underscore and concatenate those together.
 
 //   * A function that takes a character as an argument and calls the guess function on each letter object (the second function defined in `Letter.js`)
+
+const Letter = require(`./Letter`);
+
+let Word = function(word) {
+
+    this.wordObject = [];
+
+    for (let i = 0; i < word.length; i++) {
+        if(word.charAt(i) === ` `) {
+            this.wordObject.push(new Letter (` `, true));
+        } else {
+            this.wordObject.push(new Letter(word.charAt(i), false));
+        }
+    }
+
+    this.wordString = function() {
+        this.word = ``;
+
+        for (let i = 0; i < this.wordObject.length; i++) {
+            this.word = `${this.word} ${this.wordObject[i].getLetter()}`;
+        }
+
+        return this.word;
+    }
+}
+
+let myWord = new Word(`Guess This Word`);
+
+// let myGuess = `s`;
+
+// for (let i = 0; i < myWord.wordObject.length; i++) {
+//     myWord.wordObject[i].checkGuess(myGuess);
+// }
+
+// console.log(myWord.wordObject[0].checkGuess(`G`));
+// console.log(myWord.wordObject[1].checkGuess(`e`));
+
+console.log(myWord.wordString());
