@@ -1,10 +1,11 @@
 let Letter = function (letter, value) {
     this.wordLetter = letter;
     this.guessed = value;
-
+    
     this.checkGuess = function (guess) {
         if (this.guessed === true || this.wordLetter === ` ` || this.wordLetter === guess) {
             this.guessed = true;
+            this.alreadyGuessed = true;
             return true;
         } else {
             this.guessed = false;

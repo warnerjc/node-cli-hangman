@@ -54,49 +54,64 @@ function startGame() {
 
     this.randWord = wordBank[Math.floor(Math.random() * wordBank.length)].toLowerCase();
     this.gameWord = new Word(randWord);
+    this.guessCount = 0;
+    this.correctGuess = false;
 
     function guessWord() {
 
+        this.correctCount = 0;
+
         console.log(`\nHangman: ${gameWord.displayWord()}`);
 
-        inquirer
-            .prompt([
-                {
-                    type: `input`,
-                    name: `guess`,
-                    message: `Try to guess a letter in the word:`,
-                    filter: function (val) {
-                        return val.toLowerCase();
+        if (guessCount < 10) {
+            inquirer
+                .prompt([
+                    {
+                        type: `input`,
+                        name: `guess`,
+                        message: `Try to guess a letter in the word:`,
+                        filter: function (val) {
+                            return val.toLowerCase();
+                        }
                     }
-                }
-            ])
-            .then(function (res) {
+                ])
+                .then(function (res) {
 
-                for (let i = 0; i < this.gameWord.wordObject.length; i++) {
-                    this.gameWord.wordObject[i].checkGuess(res.guess);
-                }
+                    for (let i = 0; i < this.gameWord.wordObject.length; i++) {
+                        
+                        this.gameWord.wordObject[i].checkGuess(res.guess);
 
-                console.log(this.gameWord.displayWord());
-                console.log(this.gameWord.wordString());
+                        if (this.gameWord.wordObject[i].getLetter() === res.guess) {
+                            this.correctCount++;
+                            console.log(`correct guesses: ${this.correctCount}`);
+                        }
+                    }
 
-                if (this.randWord === this.gameWord.wordString()) {
-                    console.log(`\n`);
-                    console.log(`/////////////////////////////////////////////`);
-                    console.log(`//                                         //`);
-                    console.log(`//   Congrats, you guessed the Hangman!    //`);
-                    console.log(`//                                         //`);
-                    console.log(`/////////////////////////////////////////////`);
-                    console.log(`\n`);
+                    if (this.correctCount === 0) {
+                        guessCount++;
+                        console.log(`Your guess was not correct.`);
+                        console.log(`Remaining Guesses = ${10 - guessCount}`);
+                    }
 
-                    //setTimeout( startApp(), 500 ); 
+                    console.log(this.gameWord.displayWord());
+                    console.log(this.gameWord.wordString());
 
-                    startApp();
-                } else {
-                    guessWord();
-                }
+                    if (this.randWord === this.gameWord.wordString()) {
+                        console.log(`\n`);
+                        console.log(`Congrats, you guessed the Hangman!`);
+                        console.log(`\n`);
 
-                //guessWord();
-            });
+                        startApp();
+                    } else {
+                        guessWord();
+                    }
+
+                });
+
+        } else {
+            console.log(`Bummer...You ran out of guesses.`);
+            startApp();
+        }
     }
 
     guessWord();
