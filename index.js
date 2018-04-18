@@ -20,44 +20,87 @@ function startApp() {
     console.log(`\n`);
 
     inquirer
-      .prompt([
-        {
-            type: `list`,
-            name: `action`,
-            message: `What would you like to do?`,
-            choices: [`Start a Game`, `Exit the Application`],
-            filter: function (val) {
-                return val.toLowerCase();
+        .prompt([
+            {
+                type: `list`,
+                name: `action`,
+                message: `What would you like to do?`,
+                choices: [`Start a Game`, `Exit the Application`],
+                filter: function (val) {
+                    return val.toLowerCase();
+                }
             }
+        ])
+        .then(function (res) {
+            switch (res.action) {
+                case `start a game`:
+                    startGame();
+                    break;
+
+                case `exit the application`:
+                    console.log(`\nGoodbye!`);
+                    break;
+
+                default:
+                    console.log(`Something went wrong, let's try again.`);
+                    startApp();
+            }
+
         }
-      ])
-      .then( function(res) {
-          switch(res.action) {
-              case `start a game`:
-                startGame();
-                break;
-
-              case `exit the application`:
-                console.log(`\nGoodbye!`);
-                break;
-
-              default:
-                console.log(`Something went wrong, let's try again.`);
-                startApp();
-          }
-
-      }
-      );
+        );
 }
 
-function startGame(){
-    console.log(`game started`);
+function startGame() {
 
-    this.randWord = wordBank[Math.floor(Math.random() * wordBank.length)];
+    this.randWord = wordBank[Math.floor(Math.random() * wordBank.length)].toLowerCase();
     this.gameWord = new Word(randWord);
 
-    console.log(randWord);
-    console.log(gameWord);
+    function guessWord() {
+
+        console.log(`\nHangman: ${gameWord.displayWord()}`);
+
+        inquirer
+            .prompt([
+                {
+                    type: `input`,
+                    name: `guess`,
+                    message: `Try to guess a letter in the word:`,
+                    filter: function (val) {
+                        return val.toLowerCase();
+                    }
+                }
+            ])
+            .then(function (res) {
+
+                for (let i = 0; i < this.gameWord.wordObject.length; i++) {
+                    this.gameWord.wordObject[i].checkGuess(res.guess);
+                }
+
+                console.log(this.gameWord.displayWord());
+                console.log(this.gameWord.wordString());
+
+                if (this.randWord === this.gameWord.wordString()) {
+                    console.log(`\n`);
+                    console.log(`/////////////////////////////////////////////`);
+                    console.log(`//                                         //`);
+                    console.log(`//   Congrats, you guessed the Hangman!    //`);
+                    console.log(`//                                         //`);
+                    console.log(`/////////////////////////////////////////////`);
+                    console.log(`\n`);
+
+                    //setTimeout( startApp(), 500 ); 
+
+                    startApp();
+                } else {
+                    guessWord();
+                }
+
+                //guessWord();
+            });
+    }
+
+    guessWord();
+
 }
 
 startApp();

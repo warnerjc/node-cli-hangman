@@ -40,19 +40,4 @@ let Word = function(word) {
         return this.word; 
     }
 }
-
-// let myWord = new Word(`Guess This Word`);
-
-// let myGuess = `s`;
-
-// for (let i = 0; i < myWord.wordObject.length; i++) {
-//     myWord.wordObject[i].checkGuess(myGuess);
-// }
-
-// console.log(myWord.wordObject[0].checkGuess(`G`));
-// console.log(myWord.wordObject[1].checkGuess(`e`));
-
-// console.log(myWord.displayWord());
-// console.log(myWord.wordString());
-
 module.exports = Word;

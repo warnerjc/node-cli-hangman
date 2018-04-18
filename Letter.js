@@ -3,7 +3,7 @@ let Letter = function (letter, value) {
     this.guessed = value;
 
     this.checkGuess = function (guess) {
-        if (this.wordLetter === ` ` || this.wordLetter === guess) {
+        if (this.guessed === true || this.wordLetter === ` ` || this.wordLetter === guess) {
             this.guessed = true;
             return true;
         } else {
