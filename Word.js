@@ -24,14 +24,24 @@ let Word = function(word) {
         this.word = ``;
 
         for (let i = 0; i < this.wordObject.length; i++) {
+            this.word = `${this.word}${this.wordObject[i].getLetter()}`;
+        }
+
+        return this.word; 
+    }
+
+    this.displayWord = function() {
+        this.word = ``;
+
+        for (let i = 0; i < this.wordObject.length; i++) {
             this.word = `${this.word} ${this.wordObject[i].getLetter()}`;
         }
 
-        return this.word;
+        return this.word; 
     }
 }
 
-let myWord = new Word(`Guess This Word`);
+// let myWord = new Word(`Guess This Word`);
 
 // let myGuess = `s`;
 
@@ -42,4 +52,7 @@ let myWord = new Word(`Guess This Word`);
 // console.log(myWord.wordObject[0].checkGuess(`G`));
 // console.log(myWord.wordObject[1].checkGuess(`e`));
 
-console.log(myWord.wordString());
+// console.log(myWord.displayWord());
+// console.log(myWord.wordString());
+
+module.exports = Word;
