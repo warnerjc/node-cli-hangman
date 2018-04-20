@@ -80,7 +80,7 @@ function startGame() {
 
         // If remaining guesses is less than 10, then prompt user to guess a letter
         // Else, inform the user they ran out of guesses & restart the application
-        if (guessCount < 11) {
+        if (guessCount < 10) {
             inquirer
                 .prompt([
                     {
