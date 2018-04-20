@@ -8,5 +8,10 @@ This application is a server side command line version of the popular Hangman Ga
 2. Node.js (https://nodejs.org/en/)
 3. inquirer [npm install inquirer] (https://www.npmjs.com/package/inquirer)
 
+## Files
+1. Index.js, contains game logic for Hangman Game
+2. Word.js, contains Word object constructor
+3. Letter.js, contains Letter object constructor
+
 ---
 Copyright (c) Jason Warner 2018
